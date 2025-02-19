@@ -4,4 +4,6 @@ export interface DrawerToggleProps {
 }
 export interface SideDrawerProps extends DrawerToggleProps {}
 
-export interface TopBarProps extends DrawerToggleProps {}
+export interface TopBarProps extends DrawerToggleProps {
+  isMenuIconVisible:boolean
+}
