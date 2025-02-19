@@ -1,11 +1,12 @@
-import React from 'react'
+import { Stack } from "@mui/material";
+import TopBar from "./TopBar";
 
 const NewsAggregator = () => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <Stack width={"100vw"} height={"100vh"}>
+      <TopBar />
+    </Stack>
+  );
+};
 
-export default NewsAggregator
+export default NewsAggregator;
