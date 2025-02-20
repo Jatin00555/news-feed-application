@@ -1,13 +1,13 @@
-import { Stack, useMediaQuery, useTheme, Box } from "@mui/material";
+import { Stack } from "@mui/material";
 import TopBar from "./TopBar";
 import { useState } from "react";
 import SideDrawer from "./SideDrawer";
 import NewsArea from "./NewsArea";
+import { BorderBoxStack } from "./coreComponents/styledComponents";
+import { appBarHeight } from "../utils/staticData";
 
 const NewsAggregator = () => {
-  const theme = useTheme();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const toggleDrawer = (status: boolean) => {
     setIsDrawerOpen(status);
@@ -22,17 +22,15 @@ const NewsAggregator = () => {
         overflow: "hidden",
       }}
     >
-      <TopBar
-        isDrawerOpen={isDrawerOpen}
-        toggleDrawer={toggleDrawer}
-        isMenuIconVisible={isMobile}
-      />
-      {isMobile && (
+      <TopBar isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
+      <BorderBoxStack
+        overflow="hidden"
+        flexDirection={"row"}
+        paddingTop={`${appBarHeight}px`}
+      >
         <SideDrawer isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
-      )}
-      <Box flex={1} overflow="auto">
         <NewsArea />
-      </Box>
+      </BorderBoxStack>
     </Stack>
   );
 };

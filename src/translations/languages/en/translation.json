@@ -1,4 +1,7 @@
 {
   "name": "Name",
-  "news": "News"
+  "news": "News",
+  "select_author": "Select Author",
+  "select_source": "Select Source",
+  "search": "Search"
 }

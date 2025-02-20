@@ -12,7 +12,7 @@ const lightTheme = createTheme({
       default: "#212121",
     },
     text: {
-      primary: "#fff",
+      primary: "#ececec",
       secondary: "#ffCB91",
       disabled: "#8e918f",
     },

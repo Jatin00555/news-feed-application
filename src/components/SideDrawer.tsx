@@ -1,16 +1,30 @@
 import { Drawer, Box } from "@mui/material";
-import { SideDrawerProps } from "../types/componentPropTypes";
+import { appBarHeight, drawerWidth } from "../utils/staticData";
+import useIsMobile from "../utils/hooks/useIsMobileView";
+import SideFilters from "./filterComponents/SideFilters";
 
-const SideDrawer = (props: SideDrawerProps) => {
-  const { isDrawerOpen, toggleDrawer } = props;
+export interface SideDrawerProps {
+  isDrawerOpen: boolean;
+  toggleDrawer: (status: boolean) => void;
+}
+
+const SideDrawer = ({ isDrawerOpen, toggleDrawer }: SideDrawerProps) => {
+  const isMobile = useIsMobile();
   return (
     <Drawer
+      variant={isMobile ? "temporary" : "permanent"}
       anchor="left"
       open={isDrawerOpen}
       onClose={() => toggleDrawer(false)}
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        "& .MuiDrawer-paper": { width: drawerWidth, bgcolor: "primary.main" },
+      }}
+      BackdropProps={{ style: { backgroundColor: "transparent" } }}
     >
-      <Box width={250} sx={{ bgcolor: "primary.main", height: "100%" }}>
-        
+      <Box sx={{ height: "100%", paddingTop: `${appBarHeight + 10}px` }}>
+        <SideFilters />
       </Box>
     </Drawer>
   );

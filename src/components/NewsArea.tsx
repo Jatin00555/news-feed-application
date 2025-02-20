@@ -1,7 +1,24 @@
-import { Stack } from "@mui/material";
+import TopFilter from "./filterComponents/TopFilters";
+import {
+  BorderBoxStack,
+  FullSizeBoxStack,
+} from "./coreComponents/styledComponents";
 
 const NewsArea = () => {
-  return <Stack width={"100%"}>jatin</Stack>;
+  return (
+    <FullSizeBoxStack flexDirection={"row"}>
+      <BorderBoxStack
+        sx={{
+          flex: 1,
+          alignItems: "center",
+          padding: "20px",
+          flexDirection: "column",
+        }}
+      >
+        <TopFilter />
+      </BorderBoxStack>
+    </FullSizeBoxStack>
+  );
 };
 
 export default NewsArea;
