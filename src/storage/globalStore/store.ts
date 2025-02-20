@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import filterControl from "../slices/filterSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    [filterControl.name]: filterControl.reducer,
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 

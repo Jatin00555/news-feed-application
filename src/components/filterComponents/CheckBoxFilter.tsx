@@ -6,26 +6,24 @@ import {
   Checkbox,
   SxProps,
 } from "@mui/material";
-import { useCallback } from "react";
 
 export interface CheckboxFilterProps {
   title: string;
   options: string[];
   selectedItems: string[];
-  setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedItems: (items: string[]) => void;
   sx?: SxProps;
 }
 
 const CheckBoxFilter = (props: CheckboxFilterProps) => {
   const { title, options, sx, selectedItems, setSelectedItems } = props;
-  const handleToggle = useCallback(
-    (item: string) => {
-      setSelectedItems((prev) =>
-        prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
-      );
-    },
-    [setSelectedItems]
-  );
+
+  const handleToggle = (item: string) => {
+    const finalItems = selectedItems.includes(item)
+      ? selectedItems.filter((i) => i !== item)
+      : [...selectedItems, item];
+    setSelectedItems(finalItems);
+  };
 
   return (
     <Box sx={{ ...sx }}>

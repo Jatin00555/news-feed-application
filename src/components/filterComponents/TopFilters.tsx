@@ -1,10 +1,12 @@
-import { useState } from "react";
 import { Paper } from "@mui/material";
 import TextFilter from "./TextFilter";
 import CategoryFilter from "./CategoryFilter";
 import CategoryAccordion from "./CategoryAccordion";
 import { BorderBoxCenterColumnStack } from "../coreComponents/styledComponents";
 import useIsMobile from "../../utils/hooks/useIsMobileView";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../storage/globalStore/store";
+import { setCategory, setSearchQuery } from "../../storage/slices/filterSlice";
 
 const categories = [
   "Politics",
@@ -19,14 +21,16 @@ const categories = [
 
 const TopFilter = () => {
   const isMobile = useIsMobile();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const dispatch = useDispatch();
+  const { query: searchQuery, category: selectedCategories } = useSelector(
+    (state: RootState) => state.filters
+  );
 
   const handleCategoryToggle = (category: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
+    const finalItems = selectedCategories.includes(category)
+      ? selectedCategories.filter((c) => c !== category)
+      : [...selectedCategories, category];
+    dispatch(setCategory(finalItems));
   };
 
   return (
@@ -39,7 +43,10 @@ const TopFilter = () => {
       }}
     >
       <BorderBoxCenterColumnStack p={2} gap={2}>
-        <TextFilter value="1" onChange={() => {}} />
+        <TextFilter
+          value={searchQuery}
+          onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+        />
         {!isMobile && (
           <CategoryFilter
             categories={categories}
