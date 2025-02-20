@@ -1,22 +1,17 @@
 import TopFilter from "./filterComponents/TopFilters";
 import {
-  BorderBoxStack,
+  BorderBoxColumnStack,
   FullSizeBoxStack,
 } from "./coreComponents/styledComponents";
+import ContentArea from "./contentComponents/ContentArea";
 
 const NewsArea = () => {
   return (
     <FullSizeBoxStack flexDirection={"row"}>
-      <BorderBoxStack
-        sx={{
-          flex: 1,
-          alignItems: "center",
-          padding: "20px",
-          flexDirection: "column",
-        }}
-      >
+      <BorderBoxColumnStack flex={1} alignItems={"center"} padding={"20px"}>
         <TopFilter />
-      </BorderBoxStack>
+        <ContentArea />
+      </BorderBoxColumnStack>
     </FullSizeBoxStack>
   );
 };

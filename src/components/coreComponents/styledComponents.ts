@@ -11,3 +11,16 @@ export const FullWidthBoxStack = styled(BorderBoxStack)({
 export const FullSizeBoxStack = styled(FullWidthBoxStack)({
   height: "100%",
 });
+
+export const BorderBoxRowStack = styled(BorderBoxStack)({
+  flexDirection: "row",
+});
+
+export const BorderBoxColumnStack = styled(BorderBoxStack)({
+  flexDirection: "column",
+});
+
+export const BorderBoxCenterColumnStack = styled(BorderBoxColumnStack)({
+  justifyContent: "center",
+  alignItems: "center",
+});

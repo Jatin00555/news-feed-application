@@ -9,6 +9,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CustomChip from "./CustomChip";
+import { useTranslation } from "react-i18next";
 
 interface CategoryAccordionProps {
   categories: string[];
@@ -21,6 +22,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
   selectedCategories,
   handleCategoryToggle,
 }) => {
+  const { t } = useTranslation();
   return (
     <Accordion
       disableGutters
@@ -32,12 +34,12 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
       }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
+        expandIcon={<ExpandMoreIcon sx={{ color: "text.primary" }} />}
         sx={{ px: 2, minHeight: 48 }}
       >
         <Stack direction="row" alignItems="center" spacing={1}>
           <FilterListIcon fontSize="small" sx={{ color: "text.primary" }} />
-          <Typography variant="body2">Categories</Typography>
+          <Typography variant="body2">{t("categories")}</Typography>
         </Stack>
       </AccordionSummary>
       <AccordionDetails sx={{ px: 2, pt: 0, pb: 2 }}>

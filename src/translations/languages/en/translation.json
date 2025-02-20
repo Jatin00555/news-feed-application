@@ -3,5 +3,7 @@
   "news": "News",
   "select_author": "Select Author",
   "select_source": "Select Source",
-  "search": "Search"
+  "search": "Search",
+  "categories": "Categories",
+  "logo": "Logo"
 }

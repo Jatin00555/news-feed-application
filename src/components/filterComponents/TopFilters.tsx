@@ -3,7 +3,7 @@ import { Paper } from "@mui/material";
 import TextFilter from "./TextFilter";
 import CategoryFilter from "./CategoryFilter";
 import CategoryAccordion from "./CategoryAccordion";
-import { BorderBoxStack } from "../coreComponents/styledComponents";
+import { BorderBoxCenterColumnStack } from "../coreComponents/styledComponents";
 import useIsMobile from "../../utils/hooks/useIsMobileView";
 
 const categories = [
@@ -35,20 +35,10 @@ const TopFilter = () => {
       sx={{
         mb: 3,
         borderRadius: 2,
-        position: "absolute",
         bgcolor: "primary.main",
       }}
-      id="top"
     >
-      <BorderBoxStack
-        sx={{
-          p: 2,
-          flexDirection: "column",
-          gap: 2,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <BorderBoxCenterColumnStack p={2} gap={2}>
         <TextFilter value="1" onChange={() => {}} />
         {!isMobile && (
           <CategoryFilter
@@ -57,7 +47,7 @@ const TopFilter = () => {
             handleCategoryToggle={handleCategoryToggle}
           />
         )}
-      </BorderBoxStack>
+      </BorderBoxCenterColumnStack>
       {isMobile && (
         <CategoryAccordion
           categories={categories}

@@ -3,7 +3,9 @@ import TopBar from "./TopBar";
 import { useState } from "react";
 import SideDrawer from "./SideDrawer";
 import NewsArea from "./NewsArea";
-import { BorderBoxStack } from "./coreComponents/styledComponents";
+import {
+  BorderBoxRowStack,
+} from "./coreComponents/styledComponents";
 import { appBarHeight } from "../utils/staticData";
 
 const NewsAggregator = () => {
@@ -23,14 +25,14 @@ const NewsAggregator = () => {
       }}
     >
       <TopBar isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
-      <BorderBoxStack
+      <BorderBoxRowStack
         overflow="hidden"
-        flexDirection={"row"}
         paddingTop={`${appBarHeight}px`}
+        height={"100vh"}
       >
         <SideDrawer isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
         <NewsArea />
-      </BorderBoxStack>
+      </BorderBoxRowStack>
     </Stack>
   );
 };
