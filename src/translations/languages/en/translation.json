@@ -5,5 +5,8 @@
   "select_source": "Select Source",
   "search": "Search",
   "categories": "Categories",
-  "logo": "Logo"
+  "logo": "Logo",
+  "new_york_times": "NewYork Times",
+  "the_guardian": "The Guardian",
+  "news_org": "News Org"
 }

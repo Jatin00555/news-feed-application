@@ -5,9 +5,9 @@ import { FullWidthBoxStack } from "../coreComponents/styledComponents";
 import { setAuthor, setSource } from "../../storage/slices/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../storage/globalStore/store";
+import { sourceAndQueryList } from "../../utils/staticData";
 
 const authors = ["Jane Doe", "John Smith", "Alice Johnson", "Bob Brown"];
-const sources = ["BBC News", "CNN", "The Guardian", "Reuters"];
 
 const SideFilters = () => {
   const { t } = useTranslation();
@@ -22,17 +22,18 @@ const SideFilters = () => {
     >
       <Box>
         <CheckBoxFilter
-          title={`${t("select_author")}`}
-          options={authors}
-          selectedItems={selectedAuthor}
-          setSelectedItems={(items) => dispatch(setAuthor(items))}
+          title={`${t("select_source")}`}
+          options={sourceAndQueryList.map((source) => t(source.label))}
+          selectedItems={selectedSource}
+          setSelectedItems={(items) => dispatch(setSource(items))}
         />
+
         <Box mt={2}>
           <CheckBoxFilter
-            title={`${t("select_source")}`}
-            options={sources}
-            selectedItems={selectedSource}
-            setSelectedItems={(items) => dispatch(setSource(items))}
+            title={`${t("select_author")}`}
+            options={authors}
+            selectedItems={selectedAuthor}
+            setSelectedItems={(items) => dispatch(setAuthor(items))}
           />
         </Box>
       </Box>
