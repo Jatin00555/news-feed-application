@@ -1,15 +1,34 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { config } from "../config";
+import { APIQueryPayloads } from "../types/sliceTypes";
+import { sanitizeObject } from "../utils/helpers";
 
 export const newsApiSlice = createApi({
   reducerPath: "newsApi",
   baseQuery: fetchBaseQuery({ baseUrl: config.NEWS_API.BASE_URL }),
   endpoints: (builder) => ({
     fetchArticles: builder.query({
-      query: ({ query = "latest", page = 1 }) => ({
-        url: `/v2/everything`,
-        params: { q: query || "latest", page, apiKey: config.NEWS_API.KEY },
-      }),
+      query: (
+        filters: APIQueryPayloads,
+        page: number = 1,
+        pageSize: number = 10
+      ) => {
+        const { query, category, from, to, author } = filters;
+        const params = sanitizeObject({
+          q: query || "latest",
+          category: category,
+          "from-date": from,
+          "to-date": to,
+          author,
+          page,
+          pageSize,
+          apiKey: config.NEWS_API.KEY,
+        });
+        return {
+          url: `/v2/top-headlines`,
+          params: params,
+        };
+      },
     }),
   }),
 });

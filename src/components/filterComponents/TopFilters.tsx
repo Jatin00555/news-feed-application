@@ -17,6 +17,7 @@ import {
 import { ToggleElementType } from "../../types/commonTypes";
 import { newsCategories, timeLineList } from "../../utils/staticData";
 import TimelineFilter from "./TimelineFilter";
+import { useCallback } from "react";
 
 const TopFilter = () => {
   const isMobile = useIsMobile();
@@ -27,10 +28,28 @@ const TopFilter = () => {
     timeLine: selectedTimeLine,
   } = useSelector((state: RootState) => state.filters);
 
-  const handleCategoryToggle = (category: ToggleElementType) => {
-    dispatch(setCategory([category]));
-  };
+  const handleSearchChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) =>
+      dispatch(setSearchQuery(e.target.value)),
+    [dispatch]
+  );
 
+  const handleTimelineChange = useCallback(
+    (item: ToggleElementType) => dispatch(setTimeLine(item)),
+    [dispatch]
+  );
+
+  const handleCategoryToggle = useCallback(
+    (selectedCategory: ToggleElementType) => {
+      dispatch(
+        selectedCategories?.length &&
+          selectedCategories[0].key === selectedCategory.key
+          ? setCategory([])
+          : setCategory([selectedCategory])
+      );
+    },
+    [dispatch, selectedCategories]
+  );
   return (
     <Paper
       elevation={3}
@@ -42,13 +61,10 @@ const TopFilter = () => {
     >
       <BorderBoxCenterColumnStack p={2} gap={2}>
         <BorderBoxRowStack gap={isMobile ? 1 : 2}>
-          <TextFilter
-            value={searchQuery}
-            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
-          />
+          <TextFilter value={searchQuery} onChange={handleSearchChange} />
           <TimelineFilter
             items={timeLineList}
-            onChange={(item) => dispatch(setTimeLine(item))}
+            onChange={handleTimelineChange}
             selectedItem={selectedTimeLine}
           />
         </BorderBoxRowStack>
