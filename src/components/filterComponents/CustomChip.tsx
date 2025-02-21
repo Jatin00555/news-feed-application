@@ -15,7 +15,7 @@ const CustomChip = (props: CustomChipProps) => {
       clickable
       size={size}
       onClick={onClick}
-      variant={isSelected ? "filled" : "outlined"}
+      variant={isSelected ? "outlined" : "filled"}
       sx={{
         backgroundColor: isSelected ? "background.default" : "unset",
         "&:hover": {

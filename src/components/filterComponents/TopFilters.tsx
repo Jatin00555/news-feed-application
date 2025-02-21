@@ -27,10 +27,7 @@ const TopFilter = () => {
   );
 
   const handleCategoryToggle = (category: string) => {
-    const finalItems = selectedCategories.includes(category)
-      ? selectedCategories.filter((c) => c !== category)
-      : [...selectedCategories, category];
-    dispatch(setCategory(finalItems));
+    dispatch(setCategory([category]));
   };
 
   return (
