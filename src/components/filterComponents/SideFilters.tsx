@@ -7,10 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../storage/globalStore/store";
 import { sourceAndQueryList } from "../../utils/staticData";
 
-const authors = [
-  { key: 1, label: "jatin" },
-  { key: 2, label: "kumar" },
-];
 
 const SideFilters = () => {
   const { t } = useTranslation();
@@ -18,6 +14,7 @@ const SideFilters = () => {
   const { author: selectedAuthor, source: selectedSource } = useSelector(
     (state: RootState) => state.filters
   );
+  const { authors } = useSelector((state: RootState) => state.applicationInfo);
 
   return (
     <FullWidthBoxStack
@@ -30,15 +27,16 @@ const SideFilters = () => {
           selectedItems={selectedSource}
           setSelectedItems={(items) => dispatch(setSource(items))}
         />
-
-        <Box mt={2}>
-          <CheckBoxFilter
-            title={`${t("select_author")}`}
-            options={authors}
-            selectedItems={selectedAuthor}
-            setSelectedItems={(items) => dispatch(setAuthor(items))}
-          />
-        </Box>
+        {!!authors.length && (
+          <Box mt={2}>
+            <CheckBoxFilter
+              title={`${t("select_author")}`}
+              options={authors}
+              selectedItems={selectedAuthor}
+              setSelectedItems={(items) => dispatch(setAuthor(items))}
+            />
+          </Box>
+        )}
       </Box>
     </FullWidthBoxStack>
   );

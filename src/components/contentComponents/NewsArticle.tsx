@@ -24,6 +24,7 @@ const NewsArticle = (props: NewsArticleProps) => {
         backgroundColor: "primary.main",
         boxShadow: 1,
         borderRadius: 2,
+        maxHeight: "400px",
       }}
     >
       <CardHeader
@@ -67,14 +68,24 @@ const NewsArticle = (props: NewsArticleProps) => {
         />
       )}
 
-      <CardContent>
+      <CardContent sx={{ overflow: "hidden" }}>
         {isLoading ? (
           <>
             <Skeleton animation="wave" height={10} sx={{ mb: 1 }} />
             <Skeleton animation="wave" height={10} width="80%" />
           </>
         ) : (
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+          <Typography
+            variant="body2"
+            sx={{
+              color: "text.primary",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 7,
+            }}
+          >
             {description}
           </Typography>
         )}

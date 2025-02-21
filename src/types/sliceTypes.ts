@@ -5,5 +5,17 @@ export interface FilterState {
   category: ToggleElementType[];
   author: ToggleElementType[];
   source: ToggleElementType[];
-  timeLine: ToggleElementType | null
+  timeLine: ToggleElementType | null;
+}
+
+export interface APIQueryPayloads {
+  query: string;
+  category: string;
+  author: string;
+  from:string
+  to:string
+}
+
+export interface ApplicationInfoState{
+  authors:ToggleElementType[]
 }

@@ -4,9 +4,10 @@ import withInfiniteScroll from "../hocs/withInfinityScroll";
 import { NewsArticleType } from "../../types/commonTypes";
 interface ContentAreaProps {
   articles: NewsArticleType[];
+  isLoading?: boolean;
 }
 
-const ContentArea = ({ articles }: ContentAreaProps) => {
+const ContentArea = ({ articles, isLoading }: ContentAreaProps) => {
   return (
     <Grid
       container
@@ -26,7 +27,7 @@ const ContentArea = ({ articles }: ContentAreaProps) => {
     >
       {articles.map((article, index) => (
         <Grid item xs={1} sm={1} md={2} lg={3} key={index}>
-          <NewsArticle article={article} />
+          <NewsArticle article={article} isLoading={isLoading} />
         </Grid>
       ))}
     </Grid>
