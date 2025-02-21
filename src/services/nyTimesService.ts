@@ -7,9 +7,8 @@ export const nyTimesApiSlice = createApi({
   endpoints: (builder) => ({
     fetchArticles: builder.query({
       query: ({ query, page }) => ({
-        url: `svc/search/v2/articlesearch.json`,
-        params: { q: query, page },
-        headers: { "api-key": config.NY_TIMES_API.KEY },
+        url: `/svc/search/v2/articlesearch.json`,
+        params: { q: query, fq: "", "api-key": config.NY_TIMES_API.KEY },
       }),
     }),
   }),

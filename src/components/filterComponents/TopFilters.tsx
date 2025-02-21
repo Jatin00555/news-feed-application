@@ -2,20 +2,30 @@ import { Paper } from "@mui/material";
 import TextFilter from "./TextFilter";
 import CategoryFilter from "./CategoryFilter";
 import CategoryAccordion from "./CategoryAccordion";
-import { BorderBoxCenterColumnStack } from "../coreComponents/styledComponents";
+import {
+  BorderBoxCenterColumnStack,
+  BorderBoxRowStack,
+} from "../coreComponents/styledComponents";
 import useIsMobile from "../../utils/hooks/useIsMobileView";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../storage/globalStore/store";
-import { setCategory, setSearchQuery } from "../../storage/slices/filterSlice";
+import {
+  setCategory,
+  setSearchQuery,
+  setTimeLine,
+} from "../../storage/slices/filterSlice";
 import { ToggleElementType } from "../../types/commonTypes";
-import { newsCategories } from "../../utils/staticData";
+import { newsCategories, timeLineList } from "../../utils/staticData";
+import TimelineFilter from "./TimelineFilter";
 
 const TopFilter = () => {
   const isMobile = useIsMobile();
   const dispatch = useDispatch();
-  const { query: searchQuery, category: selectedCategories } = useSelector(
-    (state: RootState) => state.filters
-  );
+  const {
+    query: searchQuery,
+    category: selectedCategories,
+    timeLine: selectedTimeLine,
+  } = useSelector((state: RootState) => state.filters);
 
   const handleCategoryToggle = (category: ToggleElementType) => {
     dispatch(setCategory([category]));
@@ -31,10 +41,17 @@ const TopFilter = () => {
       }}
     >
       <BorderBoxCenterColumnStack p={2} gap={2}>
-        <TextFilter
-          value={searchQuery}
-          onChange={(e) => dispatch(setSearchQuery(e.target.value))}
-        />
+        <BorderBoxRowStack gap={isMobile ? 1 : 2}>
+          <TextFilter
+            value={searchQuery}
+            onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+          />
+          <TimelineFilter
+            items={timeLineList}
+            onChange={(item) => dispatch(setTimeLine(item))}
+            selectedItem={selectedTimeLine}
+          />
+        </BorderBoxRowStack>
         {!isMobile && (
           <CategoryFilter
             categories={newsCategories}

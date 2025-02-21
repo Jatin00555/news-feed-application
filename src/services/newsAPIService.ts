@@ -6,9 +6,9 @@ export const newsApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: config.NEWS_API.BASE_URL }),
   endpoints: (builder) => ({
     fetchArticles: builder.query({
-      query: ({ query, page }) => ({
-        url: `v2/everything`,
-        params: { q: query, page, apiKey: config.NEWS_API.KEY },
+      query: ({ query = "latest", page = 1 }) => ({
+        url: `/v2/everything`,
+        params: { q: query || "latest", page, apiKey: config.NEWS_API.KEY },
       }),
     }),
   }),

@@ -18,6 +18,6 @@ export const guardianApiSlice = createApi({
 
 export const {
   useFetchArticlesQuery: useFetchGuardianArticlesQuery,
-  useLazyFetchArticlesQuery: useFetchGuardianArticlesQueryLazy,
+  useLazyFetchArticlesQuery: useLazyFetchGuardianArticlesQuery,
 } = guardianApiSlice;
 export default guardianApiSlice;

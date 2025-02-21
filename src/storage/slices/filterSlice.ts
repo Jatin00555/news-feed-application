@@ -6,6 +6,7 @@ const initialState: FilterState = {
   source: [],
   category: [],
   author: [],
+  timeLine: null,
 };
 
 const filterControl = createSlice({
@@ -24,9 +25,17 @@ const filterControl = createSlice({
     setCategory: (state, action) => {
       state.category = action.payload;
     },
+    setTimeLine: (state, action) => {
+      state.timeLine = action.payload;
+    },
   },
 });
 
-export const { setAuthor, setSource, setCategory, setSearchQuery } =
-  filterControl.actions;
+export const {
+  setAuthor,
+  setSource,
+  setCategory,
+  setSearchQuery,
+  setTimeLine,
+} = filterControl.actions;
 export default filterControl;

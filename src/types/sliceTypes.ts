@@ -5,4 +5,5 @@ export interface FilterState {
   category: ToggleElementType[];
   author: ToggleElementType[];
   source: ToggleElementType[];
+  timeLine: ToggleElementType | null
 }

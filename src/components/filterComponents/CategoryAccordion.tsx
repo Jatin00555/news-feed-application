@@ -7,7 +7,7 @@ import {
   Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import FilterListIcon from "@mui/icons-material/FilterList";
+import CategoryIcon from '@mui/icons-material/Category';
 import CustomChip from "./CustomChip";
 import { useTranslation } from "react-i18next";
 import { ToggleElementType } from "../../types/commonTypes";
@@ -40,7 +40,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
         sx={{ px: 2, minHeight: 48 }}
       >
         <Stack direction="row" alignItems="center" spacing={1}>
-          <FilterListIcon fontSize="small" sx={{ color: "text.primary" }} />
+          <CategoryIcon fontSize="small" sx={{ color: "text.primary" }} />
           <Typography variant="body2">{t("categories")}</Typography>
         </Stack>
       </AccordionSummary>

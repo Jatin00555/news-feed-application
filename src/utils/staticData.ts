@@ -1,4 +1,5 @@
 import i18n from "../translations/i18n";
+const { t } = i18n;
 
 const drawerWidth = 250;
 const appBarHeight = 54;
@@ -9,15 +10,15 @@ const guardian = "guardian";
 const sourceAndQueryList = [
   {
     key: nyTimes,
-    label: i18n.t("new_york_times"),
+    label: t("new_york_times"),
   },
   {
     key: newsApi,
-    label: i18n.t("news_org"),
+    label: t("news_org"),
   },
   {
     key: guardian,
-    label: i18n.t("the_guardian"),
+    label: t("the_guardian"),
   },
 ];
 
@@ -32,6 +33,14 @@ const newsCategories = [
   { key: "world", label: "World" },
 ];
 
+const timeLineList = [
+  { key: "today", label: t("today") },
+  { key: "yesterday", label: t("yesterday") },
+  { key: "week", label: t("this_week") },
+  { key: "month", label: t("this_month") },
+  { key: "all", label: t("all_time") },
+];
+
 export {
   drawerWidth,
   appBarHeight,
@@ -40,4 +49,5 @@ export {
   newsApi,
   nyTimes,
   guardian,
+  timeLineList,
 };

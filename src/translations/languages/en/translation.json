@@ -8,5 +8,10 @@
   "logo": "Logo",
   "new_york_times": "NewYork Times",
   "the_guardian": "The Guardian",
-  "news_org": "News Org"
+  "news_org": "News Org",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "this_week": "This Week",
+  "this_month": "This Month",
+  "all_time": "All Time"
 }
