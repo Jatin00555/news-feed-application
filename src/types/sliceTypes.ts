@@ -1,6 +1,8 @@
+import { ToggleElementType } from "./commonTypes";
+
 export interface FilterState {
   query: string;
-  category: string[];
-  author: string[];
-  source: string[];
+  category: ToggleElementType[];
+  author: ToggleElementType[];
+  source: ToggleElementType[];
 }

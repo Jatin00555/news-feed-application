@@ -7,17 +7,8 @@ import useIsMobile from "../../utils/hooks/useIsMobileView";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../storage/globalStore/store";
 import { setCategory, setSearchQuery } from "../../storage/slices/filterSlice";
-
-const categories = [
-  "Politics",
-  "Business",
-  "Technology",
-  "Health",
-  "Science",
-  "Sports",
-  "Entertainment",
-  "World",
-];
+import { ToggleElementType } from "../../types/commonTypes";
+import { newsCategories } from "../../utils/staticData";
 
 const TopFilter = () => {
   const isMobile = useIsMobile();
@@ -26,7 +17,7 @@ const TopFilter = () => {
     (state: RootState) => state.filters
   );
 
-  const handleCategoryToggle = (category: string) => {
+  const handleCategoryToggle = (category: ToggleElementType) => {
     dispatch(setCategory([category]));
   };
 
@@ -46,7 +37,7 @@ const TopFilter = () => {
         />
         {!isMobile && (
           <CategoryFilter
-            categories={categories}
+            categories={newsCategories}
             selectedCategories={selectedCategories}
             handleCategoryToggle={handleCategoryToggle}
           />
@@ -54,7 +45,7 @@ const TopFilter = () => {
       </BorderBoxCenterColumnStack>
       {isMobile && (
         <CategoryAccordion
-          categories={categories}
+          categories={newsCategories}
           selectedCategories={selectedCategories}
           handleCategoryToggle={handleCategoryToggle}
         />

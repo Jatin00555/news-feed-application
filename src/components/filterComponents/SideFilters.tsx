@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../storage/globalStore/store";
 import { sourceAndQueryList } from "../../utils/staticData";
 
-const authors = ["Jane Doe", "John Smith", "Alice Johnson", "Bob Brown"];
+const authors = [
+  { key: 1, label: "jatin" },
+  { key: 2, label: "kumar" },
+];
 
 const SideFilters = () => {
   const { t } = useTranslation();
@@ -23,7 +26,7 @@ const SideFilters = () => {
       <Box>
         <CheckBoxFilter
           title={`${t("select_source")}`}
-          options={sourceAndQueryList.map((source) => t(source.label))}
+          options={sourceAndQueryList}
           selectedItems={selectedSource}
           setSelectedItems={(items) => dispatch(setSource(items))}
         />

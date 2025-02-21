@@ -10,11 +10,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CustomChip from "./CustomChip";
 import { useTranslation } from "react-i18next";
+import { ToggleElementType } from "../../types/commonTypes";
 
 interface CategoryAccordionProps {
-  categories: string[];
-  selectedCategories: string[];
-  handleCategoryToggle: (category: string) => void;
+  categories: ToggleElementType[];
+  selectedCategories: ToggleElementType[];
+  handleCategoryToggle: (category: ToggleElementType) => void;
 }
 
 const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
@@ -23,6 +24,7 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
   handleCategoryToggle,
 }) => {
   const { t } = useTranslation();
+
   return (
     <Accordion
       disableGutters
@@ -46,9 +48,11 @@ const CategoryAccordion: React.FC<CategoryAccordionProps> = ({
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
           {categories.map((category) => (
             <CustomChip
-              key={category}
-              label={category}
-              isSelected={selectedCategories.includes(category)}
+              key={category.key}
+              label={category.label}
+              isSelected={selectedCategories.some(
+                (ele: ToggleElementType) => ele.key === category.key
+              )}
               onClick={() => handleCategoryToggle(category)}
             />
           ))}

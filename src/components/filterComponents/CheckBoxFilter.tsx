@@ -6,21 +6,22 @@ import {
   Checkbox,
   SxProps,
 } from "@mui/material";
+import { ToggleElementType } from "../../types/commonTypes";
 
 export interface CheckboxFilterProps {
   title: string;
-  options: string[];
-  selectedItems: string[];
-  setSelectedItems: (items: string[]) => void;
+  options: ToggleElementType[];
+  selectedItems: ToggleElementType[];
+  setSelectedItems: (items: ToggleElementType[]) => void;
   sx?: SxProps;
 }
 
 const CheckBoxFilter = (props: CheckboxFilterProps) => {
   const { title, options, sx, selectedItems, setSelectedItems } = props;
-
-  const handleToggle = (item: string) => {
-    const finalItems = selectedItems.includes(item)
-      ? selectedItems.filter((i) => i !== item)
+  const handleToggle = (item: ToggleElementType) => {
+    const exists = selectedItems.some((i) => i.key === item.key);
+    const finalItems = exists
+      ? selectedItems.filter((i) => i.key !== item.key)
       : [...selectedItems, item];
     setSelectedItems(finalItems);
   };
@@ -37,10 +38,10 @@ const CheckBoxFilter = (props: CheckboxFilterProps) => {
       <FormGroup aria-labelledby={`${title}-label`}>
         {options.map((item) => (
           <FormControlLabel
-            key={item}
+            key={item.key}
             control={
               <Checkbox
-                checked={selectedItems.includes(item)}
+                checked={selectedItems.some((i) => i.key === item.key)}
                 onChange={() => handleToggle(item)}
                 sx={{
                   color: "text.primary",
@@ -48,7 +49,7 @@ const CheckBoxFilter = (props: CheckboxFilterProps) => {
                 }}
               />
             }
-            label={item}
+            label={item.label}
           />
         ))}
       </FormGroup>
