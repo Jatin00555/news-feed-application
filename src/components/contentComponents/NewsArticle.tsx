@@ -1,33 +1,22 @@
-import React from "react";
 import {
   Card,
   CardHeader,
-  CardContent,
-  CardMedia,
-  Avatar,
-  Typography,
-  IconButton,
   Skeleton,
+  Avatar,
+  CardMedia,
+  CardContent,
+  Typography,
 } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { NewsArticleType } from "../../types/commonTypes";
 
 interface NewsArticleProps {
-  loading?: boolean;
-  avatarUrl?: string;
-  title?: string;
-  subheader?: string;
-  imageUrl?: string;
-  description?: string;
+  isLoading?: boolean;
+  article?: NewsArticleType;
 }
 
-const NewsArticle: React.FC<NewsArticleProps> = ({
-  loading = true,
-  avatarUrl,
-  title,
-  subheader,
-  imageUrl,
-  description,
-}) => {
+const NewsArticle = (props: NewsArticleProps) => {
+  const { isLoading, article } = props;
+  const { title, avatarUrl, subheader, imageUrl, description } = article ?? {};
   return (
     <Card
       sx={{
@@ -39,7 +28,7 @@ const NewsArticle: React.FC<NewsArticleProps> = ({
     >
       <CardHeader
         avatar={
-          loading ? (
+          isLoading ? (
             <Skeleton
               animation="wave"
               variant="circular"
@@ -50,22 +39,15 @@ const NewsArticle: React.FC<NewsArticleProps> = ({
             <Avatar alt={title} src={avatarUrl} />
           )
         }
-        action={
-          !loading && (
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          )
-        }
         title={
-          loading ? (
+          isLoading ? (
             <Skeleton animation="wave" height={10} width="80%" sx={{ mb: 1 }} />
           ) : (
             title
           )
         }
         subheader={
-          loading ? (
+          isLoading ? (
             <Skeleton animation="wave" height={10} width="40%" />
           ) : (
             subheader
@@ -73,7 +55,7 @@ const NewsArticle: React.FC<NewsArticleProps> = ({
         }
       />
 
-      {loading ? (
+      {isLoading ? (
         <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
       ) : (
         <CardMedia
@@ -86,7 +68,7 @@ const NewsArticle: React.FC<NewsArticleProps> = ({
       )}
 
       <CardContent>
-        {loading ? (
+        {isLoading ? (
           <>
             <Skeleton animation="wave" height={10} sx={{ mb: 1 }} />
             <Skeleton animation="wave" height={10} width="80%" />

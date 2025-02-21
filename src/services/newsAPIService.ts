@@ -14,5 +14,8 @@ export const newsApiSlice = createApi({
   }),
 });
 
-export const { useFetchArticlesQuery } = newsApiSlice;
+export const {
+  useFetchArticlesQuery: useFetchArticleQuery,
+  useLazyFetchArticlesQuery: useLazyArticleNewsQuery,
+} = newsApiSlice;
 export default newsApiSlice;

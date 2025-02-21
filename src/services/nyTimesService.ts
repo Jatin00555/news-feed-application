@@ -15,6 +15,8 @@ export const nyTimesApiSlice = createApi({
   }),
 });
 
-export const { useFetchArticlesQuery: useFetchNYTimesArticlesQuery } =
-  nyTimesApiSlice;
+export const {
+  useFetchArticlesQuery: useFetchNYTimesArticlesQuery,
+  useLazyFetchArticlesQuery: useLazyFetchNYTimesArticlesQuery,
+} = nyTimesApiSlice;
 export default nyTimesApiSlice;

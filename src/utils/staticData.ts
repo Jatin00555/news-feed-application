@@ -32,4 +32,12 @@ const newsCategories = [
   { key: "world", label: "World" },
 ];
 
-export { drawerWidth, appBarHeight, sourceAndQueryList, newsCategories };
+export {
+  drawerWidth,
+  appBarHeight,
+  sourceAndQueryList,
+  newsCategories,
+  newsApi,
+  nyTimes,
+  guardian,
+};

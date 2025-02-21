@@ -6,13 +6,18 @@ export const guardianApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: config.GUARDIAN_API.BASE_URL }),
   endpoints: (builder) => ({
     fetchArticles: builder.query({
-      query: ({ query, page }) => ({
-        url: `search`,
-        params: { q: query, page, "api-key": config.GUARDIAN_API.KEY },
-      }),
+      query: ({ query, page }) => {
+        return {
+          url: `search`,
+          params: { q: query, page, "api-key": config.GUARDIAN_API.KEY },
+        };
+      },
     }),
   }),
 });
 
-export const { useFetchArticlesQuery: useFetchGuardianArticlesQuery } = guardianApiSlice;
-export default guardianApiSlice
+export const {
+  useFetchArticlesQuery: useFetchGuardianArticlesQuery,
+  useLazyFetchArticlesQuery: useFetchGuardianArticlesQueryLazy,
+} = guardianApiSlice;
+export default guardianApiSlice;
