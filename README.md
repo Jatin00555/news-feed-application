@@ -75,21 +75,16 @@ Before running the application, ensure you have:
    ```
    Update `.env` with your API keys:
    ```env
-   REACT_APP_NEWS_API_KEY=your_newsapi_key
-   REACT_APP_GUARDIAN_API_KEY=your_guardian_key
-   REACT_APP_NYTIMES_API_KEY=your_nytimes_key
+   VITE_NEWS_API_KEY=your_newsapi_key_here
+   VITE_GUARDIAN_API_KEY=your_guardian_api_key_here
+   VITE_NY_TIMES_API_KEY=your_nytimes_key_here
    ```
 
 4. **Start Development Server**
    ```bash
-   npm start
+   npm run dev
    ```
    Access the application at `http://localhost:3000`
-
-5. **Run Tests**
-   ```bash
-   npm test
-   ```
 
 6. **Build for Production**
    ```bash
@@ -118,25 +113,6 @@ Before running the application, ensure you have:
    docker-compose up -d
    ```
 
-## 📁 Project Structure
-
-```
-news-aggregator/
-├── src/
-│   ├── components/    # Reusable UI components
-│   ├── pages/        # Page components
-│   ├── services/     # API services
-│   ├── store/        # Redux store configuration
-│   ├── hooks/        # Custom React hooks
-│   ├── utils/        # Utility functions
-│   └── types/        # TypeScript type definitions
-├── public/           # Static assets
-├── tests/           # Test files
-└── docker/          # Docker configuration files
-```
-
-## 🔧 Configuration
-
 ### API Keys
 
 Obtain API keys from:
@@ -148,18 +124,14 @@ Obtain API keys from:
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| REACT_APP_NEWS_API_KEY | NewsAPI access key | Yes |
-| REACT_APP_GUARDIAN_API_KEY | Guardian API key | Yes |
-| REACT_APP_NYTIMES_API_KEY | NY Times API key | Yes |
+| VITE_NEWS_API_KEY | NewsAPI access key | Yes |
+| VITE_GUARDIAN_API_KEY | Guardian API key | Yes |
+| VITE_NY_TIMES_API_KEY | NY Times API key | Yes |
 
 ## 📚 Available Scripts
 
-- `npm start`: Start development server
-- `npm test`: Run test suite
+- `npm run dev`: Start development server
 - `npm run build`: Build for production
-- `npm run lint`: Run ESLint
-- `npm run format`: Format code with Prettier
-- `npm run storybook`: Start Storybook development server
 
 ## 🤝 Contributing
 
@@ -169,16 +141,12 @@ Obtain API keys from:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGithub](https://github.com/yourusername)
+- **Jatin Kumar** - *Initial work* - [YourGithub](https://github.com/jatin00555)
 
 ## 🙏 Acknowledgments
 
 - Thanks to NewsAPI, The Guardian, and NY Times for providing their APIs
-- All contributors who have helped this project grow
-- The amazing React and TypeScript communities
+- The amazing React and TypeScript communities, Open AI
