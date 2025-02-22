@@ -131,51 +131,6 @@ docker run -d -p 3000:3000 --name news-feed-application \
   news-feed-application
 ```
 
-#### Using Docker Compose
-
-1. Create or modify `docker-compose.yml`:
-```yaml
-version: '3.8'
-services:
-  app:
-    image: jatin00555/news-feed-application:latest  # Use Docker Hub image
-    # OR build locally:
-    # build: .
-    ports:
-      - "3000:3000"
-    env_file:
-      - .env
-    restart: unless-stopped
-```
-
-2. Run with Docker Compose:
-```bash
-# Start the application
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop the application
-docker-compose down
-```
-
-### Common Docker Commands
-```bash
-# View container logs
-docker logs news-aggregator
-
-# Stop container
-docker stop news-aggregator
-
-# Remove container
-docker rm news-aggregator
-
-# Update to latest version
-docker pull jatin00555/news-aggregator:latest
-docker-compose up -d --force-recreate
-```
-
 ## 📚 Available Scripts
 
 - `npm run dev`: Start development server
