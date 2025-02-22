@@ -84,7 +84,7 @@ Before running the application, ensure you have:
    ```bash
    npm run dev
    ```
-   Access the application at `http://localhost:3000`
+   Access the application at `http://localhost:5173`
 
 6. **Build for Production**
    ```bash
