@@ -1,5 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { BorderBoxCenterColumnStack } from "../coreComponents/styledComponents";
 
 interface NoDataProps {
   message?: string;
@@ -7,21 +8,13 @@ interface NoDataProps {
 
 const NoData = (props: NoDataProps) => {
   const { t } = useTranslation();
-  const {message=t('no_article_found')} = props;
+  const { message = t("no_article_found") } = props;
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      height="300px"
-      gap={2}
-      textAlign="center"
-    >
+    <BorderBoxCenterColumnStack height="300px" gap={2}>
       <Typography variant="h6" color="textSecondary">
         {message}
       </Typography>
-    </Box>
+    </BorderBoxCenterColumnStack>
   );
 };
 

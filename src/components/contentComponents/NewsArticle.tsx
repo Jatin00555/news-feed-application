@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { NewsArticleType } from "../../types/commonTypes";
-import { memo } from "react";
 import { newsCardStyling, newsDescStyling } from "../styles";
 
 interface NewsArticleProps {
@@ -16,7 +15,7 @@ interface NewsArticleProps {
   article?: NewsArticleType;
 }
 
-const NewsArticle = memo((props: NewsArticleProps) => {
+const NewsArticle = (props: NewsArticleProps) => {
   const { isLoading, article } = props;
   const { title, avatarUrl, subheader, imageUrl, description } = article ?? {};
   return (
@@ -80,6 +79,6 @@ const NewsArticle = memo((props: NewsArticleProps) => {
       </CardContent>
     </Card>
   );
-});
+};
 
 export default NewsArticle;
