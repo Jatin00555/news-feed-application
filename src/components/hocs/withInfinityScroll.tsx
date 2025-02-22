@@ -1,6 +1,9 @@
 import { useEffect, useRef, useCallback } from "react";
 import { CircularProgress } from "@mui/material";
-import { FullWidthBoxStack } from "../coreComponents/styledComponents";
+import {
+  BorderBoxCenterColumnStack,
+  FullWidthBoxStack,
+} from "../coreComponents/styledComponents";
 
 interface WithInfiniteScrollProps {
   loadMore: () => void;
@@ -29,7 +32,8 @@ const withInfiniteScroll = <P extends object>(
         observerInstance.current.disconnect();
       }
       observerInstance.current = new IntersectionObserver(handleObserver, {
-        threshold: 1.0,
+        threshold: 0.5,
+        rootMargin: "100px",
       });
       observerInstance.current.observe(observerRef.current);
       return () => observerInstance.current?.disconnect();
@@ -39,12 +43,14 @@ const withInfiniteScroll = <P extends object>(
       <FullWidthBoxStack sx={{ overflow: "auto" }}>
         <WrappedComponent {...(props as P)} />
         {props.hasMore && (
-          <div
+          <BorderBoxCenterColumnStack
             ref={observerRef}
-            style={{ height: "10px", marginBottom: "20px" }}
+            sx={{ minHeight: "100px", padding: "5px" }}
           >
-            <CircularProgress />
-          </div>
+            <CircularProgress
+              sx={{ color: "text.primary", fontSize: "10px" }}
+            />
+          </BorderBoxCenterColumnStack>
         )}
       </FullWidthBoxStack>
     );

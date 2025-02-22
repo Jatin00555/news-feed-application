@@ -44,12 +44,9 @@ const NewsArea = () => {
     handleFetchNews();
   }, [handleFetchNews]);
 
-  const throttledFetchNews = useCallback(
-    throttle(() => {
-      handleFetchNews();
-    }, 2000),
-    [handleFetchNews]
-  );
+  const throttledFetchNews = useCallback(throttle(handleFetchNews, 2000), [
+    handleFetchNews,
+  ]);
 
   return (
     <FullSizeBoxStack flexDirection="row">
@@ -59,8 +56,9 @@ const NewsArea = () => {
           <NoData />
         ) : (
           <ContentArea
+            //Keeping this always true because there in no tract of end page number in APIS hence, but we can surely manage this, hence there will alway be a loader below the article area
             hasMore={true}
-            articles={data}
+            articles={isLoading ? Array.from({ length: 8 }) : data}
             loadMore={throttledFetchNews}
             isLoading={isLoading}
           />

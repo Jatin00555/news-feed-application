@@ -26,7 +26,7 @@ const ContentArea = ({ articles, isLoading }: ContentAreaProps) => {
       alignItems="center"
     >
       {articles.map((article, index) => (
-        <Grid item xs={1} sm={1} md={2} lg={3} key={article.id ?? index}>
+        <Grid item xs={1} sm={1} md={2} lg={3} key={article?.id ?? index}>
           <NewsArticle article={article} isLoading={isLoading} />
         </Grid>
       ))}

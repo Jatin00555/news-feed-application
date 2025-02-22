@@ -1,13 +1,11 @@
-import { useEffect, useState, useMemo } from "react";
-import { useLazyArticleNewsQuery } from "../../services/newsAPIService";
+import { useEffect, useState, useMemo, useRef } from "react";
+import { useLazyFetchNewsArticlesQuery } from "../../services/newsAPIService";
 import { useLazyFetchNYTimesArticlesQuery } from "../../services/nyTimesService";
 import { useLazyFetchGuardianArticlesQuery } from "../../services/guardianService";
 import { categoryMapping, guardian, newsApi, nyTimes } from "../staticData";
 import { debounce } from "lodash";
-import { getDateRange, normalizeNewsData } from "../helpers";
-import { NewsApiArticle, NewsArticleType } from "../../types/commonTypes";
-import { setAuthorList } from "../../storage/slices/applicationInfoSlice";
-import { useDispatch } from "react-redux";
+import { getDateRange } from "../helpers";
+import { NewsArticleType } from "../../types/commonTypes";
 
 interface FetchQueryOptions {
   source?: string[];
@@ -18,55 +16,37 @@ interface FetchQueryOptions {
 }
 
 const useFetchNews = () => {
-  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<NewsArticleType[]>([]);
   const [selectedSource, setSelectedSource] = useState<string[]>([]);
   const [authorFilter, setAuthorFilter] = useState<string>("");
+  const pageCount = useRef<Record<string, number>>({
+    [newsApi]: 1,
+    [nyTimes]: 1,
+    [guardian]: 1,
+  });
+  const queryString = useRef<string>("");
 
   const [fetchNewsOrg, { data: newsOrgData, isLoading: newsOrgsLoading }] =
-    useLazyArticleNewsQuery();
+    useLazyFetchNewsArticlesQuery();
   const [fetchNyTimes, { data: nyTimesData, isLoading: nyTimesLoading }] =
     useLazyFetchNYTimesArticlesQuery();
   const [fetchGuardian, { data: guardianData, isLoading: guardianLoading }] =
     useLazyFetchGuardianArticlesQuery();
 
-  useEffect(() => {
-    if (newsOrgData?.articles) {
-      dispatch(
-        setAuthorList(
-          newsOrgData.articles.map((ele: NewsApiArticle) => ({
-            key: ele.author,
-            label: ele.author,
-          })) ?? []
-        )
-      );
-    }
-  }, [newsOrgData, dispatch]);
+  // Store API responses in a dictionary instead of switch-case
+  const apiResponses: Record<string, NewsArticleType[] | undefined> = {
+    [newsApi]: newsOrgData,
+    [nyTimes]: nyTimesData,
+    [guardian]: guardianData,
+  };
 
   useEffect(() => {
     if (authorFilter) {
-      setData(normalizeNewsData(newsApi, newsOrgData?.articles ?? []));
+      setData(newsOrgData || []);
     } else if (selectedSource.length) {
-      const aggregatedData: NewsArticleType[] = selectedSource.flatMap(
-        (source) => {
-          switch (source) {
-            case newsApi:
-              return normalizeNewsData(source, newsOrgData?.articles ?? []);
-            case nyTimes:
-              return normalizeNewsData(
-                source,
-                nyTimesData?.response?.docs ?? []
-              );
-            case guardian:
-              return normalizeNewsData(
-                source,
-                guardianData?.response?.results ?? []
-              );
-            default:
-              return [];
-          }
-        }
+      const aggregatedData = selectedSource.flatMap(
+        (source) => apiResponses[source] || []
       );
       setData(aggregatedData);
     } else {
@@ -76,7 +56,7 @@ const useFetchNews = () => {
 
   useEffect(() => {
     setIsLoading(
-      !data.length && (newsOrgsLoading || nyTimesLoading || guardianLoading)
+      (newsOrgsLoading || nyTimesLoading || guardianLoading) && !data.length
     );
   }, [newsOrgsLoading, nyTimesLoading, guardianLoading, data]);
 
@@ -84,6 +64,14 @@ const useFetchNews = () => {
     () =>
       debounce((opts: FetchQueryOptions) => {
         const { source, query = "", category, timeline, authors = "" } = opts;
+        const str = `${query}-${category}-${authors}-${timeline}`;
+        if (queryString.current && queryString.current !== str) {
+          // Reset pagination when query changes
+          Object.keys(pageCount.current).forEach(
+            (key) => (pageCount.current[key] = 1)
+          );
+        }
+        queryString.current = str;
         setAuthorFilter(authors);
 
         const fetchFunctions: Record<string, Function> = {
@@ -102,13 +90,14 @@ const useFetchNews = () => {
           fetchFunctions[key]?.({
             query,
             category: category ? categoryMapping[category]?.[key] : "",
-            page: 1,
+            page: pageCount.current[key],
             from,
             to,
             author: authors,
           });
+          pageCount.current[key] += 1;
         });
-      }, 1000),
+      }, 500),
     []
   );
 

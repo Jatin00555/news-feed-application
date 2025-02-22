@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { config } from "../config";
 import { APIQueryPayloads } from "../types/sliceTypes";
-import { sanitizeObject } from "../utils/helpers";
+import { normalizeNewsData, sanitizeObject } from "../utils/helpers";
+import { newsApi } from "../utils/staticData";
 
 export const newsApiSlice = createApi({
   reducerPath: "newsApi",
@@ -20,7 +21,7 @@ export const newsApiSlice = createApi({
         } = filters;
         const params = sanitizeObject({
           q: query || "latest",
-          category: category,
+          category,
           "from-date": from,
           "to-date": to,
           author,
@@ -28,17 +29,37 @@ export const newsApiSlice = createApi({
           pageSize,
           apiKey: config.NEWS_API.KEY,
         });
-        return {
-          url: `/v2/top-headlines`,
-          params: params,
-        };
+        return { url: `/v2/top-headlines`, params };
+      },
+
+      transformResponse: (response: any) =>
+        normalizeNewsData(newsApi, response?.articles || []),
+
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const {
+          category = "",
+          query = "",
+          from = "",
+          to = "",
+          author = "",
+        } = queryArgs;
+        return `${endpointName}-${query}-${category}-${from}-${to}-${author}`;
+      },
+
+      merge: (currentCache, newItems) => {
+        return [...(currentCache || []), ...newItems];
+      },
+
+      forceRefetch({ currentArg, previousArg }) {
+        return JSON.stringify(currentArg) !== JSON.stringify(previousArg);
       },
     }),
   }),
 });
 
 export const {
-  useFetchArticlesQuery: useFetchArticleQuery,
-  useLazyFetchArticlesQuery: useLazyArticleNewsQuery,
+  useFetchArticlesQuery: useFetchNewsArticlesQuery,
+  useLazyFetchArticlesQuery: useLazyFetchNewsArticlesQuery,
 } = newsApiSlice;
+
 export default newsApiSlice;

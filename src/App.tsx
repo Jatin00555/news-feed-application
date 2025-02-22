@@ -4,12 +4,15 @@ import NewsAggregator from "./components/NewsAggregator";
 import { store } from "./storage/globalStore/store";
 import { ThemeProvider } from "@mui/material";
 import lightTheme from "./themes/lightTheme";
+import GlobalErrorBoundary from "./components/GlobalErrorBoundry";
 
 function App() {
   return (
     <ThemeProvider theme={lightTheme}>
       <Provider store={store}>
-        <NewsAggregator />
+        <GlobalErrorBoundary>
+          <NewsAggregator />
+        </GlobalErrorBoundary>
       </Provider>
     </ThemeProvider>
   );
