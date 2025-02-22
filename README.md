@@ -111,10 +111,10 @@ Before running the application, ensure you have:
 docker pull jatin00555/news-feed-application:latest
 
 # Run the container
-docker run -d \
-  -p 3000:3000 \
-  --name news-feed-application \
-  --env-file .env \
+docker run -d -p 8080:80 --name news-feed \
+  -e VITE_NEWS_API_KEY=your_newsapi_key_here \
+  -e VITE_GUARDIAN_API_KEY=your_guardian_api_key_here \
+  -e VITE_NY_TIMES_API_KEY=your_nytimes_key_here \
   jatin00555/news-feed-application:latest
 ```
 
