@@ -19,12 +19,13 @@ const NewsArea = () => {
   const { source, category, query, author, timeLine } = filters;
   const { data, isLoading, fetchNews } = useFetchNews();
 
-  // Persist filters (excluding unnecessary fields)
+  // Persist filters (excluding unnecessary fields, author is also resetting as it is not consistence)
   useEffect(() => {
     persistFiltersToLocalStorage({
       ...filters,
       query: "",
       timeLine: null,
+      author: [],
     });
   }, [filters]);
 
