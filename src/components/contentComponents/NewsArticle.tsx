@@ -8,25 +8,19 @@ import {
   Typography,
 } from "@mui/material";
 import { NewsArticleType } from "../../types/commonTypes";
+import { memo } from "react";
+import { newsCardStyling, newsDescStyling } from "../styles";
 
 interface NewsArticleProps {
   isLoading?: boolean;
   article?: NewsArticleType;
 }
 
-const NewsArticle = (props: NewsArticleProps) => {
+const NewsArticle = memo((props: NewsArticleProps) => {
   const { isLoading, article } = props;
   const { title, avatarUrl, subheader, imageUrl, description } = article ?? {};
   return (
-    <Card
-      sx={{
-        width: "100%",
-        backgroundColor: "primary.main",
-        boxShadow: 1,
-        borderRadius: 2,
-        maxHeight: "400px",
-      }}
-    >
+    <Card sx={{ ...newsCardStyling, backgroundColor: "primary.main" }}>
       <CardHeader
         avatar={
           isLoading ? (
@@ -77,14 +71,8 @@ const NewsArticle = (props: NewsArticleProps) => {
         ) : (
           <Typography
             variant="body2"
-            sx={{
-              color: "text.primary",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "-webkit-box",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 7,
-            }}
+            sx={newsDescStyling}
+            color={"text.primary"}
           >
             {description}
           </Typography>
@@ -92,6 +80,6 @@ const NewsArticle = (props: NewsArticleProps) => {
       </CardContent>
     </Card>
   );
-};
+});
 
 export default NewsArticle;

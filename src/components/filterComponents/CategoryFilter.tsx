@@ -1,6 +1,7 @@
 import { Stack } from "@mui/material";
 import CustomChip from "./CustomChip";
 import { ToggleElementType } from "../../types/commonTypes";
+import { categoryContainer } from "../styles";
 
 interface CategoryFilterProps {
   categories: ToggleElementType[];
@@ -14,13 +15,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   handleCategoryToggle,
 }) => {
   return (
-    <Stack
-      direction="row"
-      spacing={1}
-      flexWrap="wrap"
-      alignItems="center"
-      sx={{ minWidth: "50%" }}
-    >
+    <Stack sx={categoryContainer}>
       {categories.map((category) => (
         <CustomChip
           key={category.key}

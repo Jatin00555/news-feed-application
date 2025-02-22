@@ -7,7 +7,7 @@ import {
   Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CategoryIcon from '@mui/icons-material/Category';
+import CategoryIcon from "@mui/icons-material/Category";
 import CustomChip from "./CustomChip";
 import { useTranslation } from "react-i18next";
 import { ToggleElementType } from "../../types/commonTypes";
