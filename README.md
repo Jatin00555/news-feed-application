@@ -124,9 +124,10 @@ docker run -d -p 8080:80 --name news-feed-application \
 docker build -t news-feed-application .
 
 # Run the container
-docker run -d \
-  -p 3000:3000 \
-  --env-file .env \
+docker run -d -p 3000:3000 --name news-feed-application \
+  -e VITE_NEWS_API_KEY=your_newsapi_key_here \
+  -e VITE_GUARDIAN_API_KEY=your_guardian_api_key_here \
+  -e VITE_NY_TIMES_API_KEY=your_nytimes_key_here \
   news-feed-application
 ```
 
