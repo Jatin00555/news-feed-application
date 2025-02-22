@@ -60,8 +60,8 @@ Before running the application, ensure you have:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/news-aggregator.git
-   cd news-aggregator
+   git clone https://github.com/jatin00555/news-feed-application.git
+   cd news-feed-application
    ```
 
 2. **Install Dependencies**
