@@ -32,9 +32,9 @@ export const guardianApiSlice = createApi({
           query = "",
           from = "",
           to = "",
-          page = 1,
+          sourceString=''
         } = queryArgs;
-        return `${endpointName}-${query}-${category}-${from}-${to}-${page}`;
+        return `${endpointName}-${query}-${category}-${from}-${to}-${sourceString}`;
       },
 
       merge: (currentCache, newItems) => {

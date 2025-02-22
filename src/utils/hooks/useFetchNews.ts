@@ -82,7 +82,9 @@ const useFetchNews = () => {
     () =>
       debounce((opts: FetchQueryOptions) => {
         const { source, query = "", category, timeline, authors = "" } = opts;
-        const str = `${query}-${category}-${authors}-${timeline}`;
+        const str = `${query}-${category}-${authors}-${timeline}-${
+          source?.join("-") ?? ""
+        }`;
         if (queryString.current && queryString.current !== str) {
           // Reset pagination when query changes
           Object.keys(pageCount.current).forEach(
@@ -112,6 +114,7 @@ const useFetchNews = () => {
             from,
             to,
             author: authors,
+            sourceString: source?.join("-") ?? "", //This is added only to break cache
           });
           pageCount.current[key] += 1;
         });

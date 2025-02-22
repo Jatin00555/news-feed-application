@@ -27,8 +27,8 @@ export const nyTimesApiSlice = createApi({
         normalizeNewsData(nyTimes, response?.response?.docs || []),
 
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        const { category = "", query = "", from = "", to = "" } = queryArgs;
-        return `${endpointName}-${query}-${category}-${from}-${to}`;
+        const { category = "", query = "", from = "", to = "", sourceString='' } = queryArgs;
+        return `${endpointName}-${query}-${category}-${from}-${to}-${sourceString}`;
       },
 
       merge: (currentCache, newItems) => {

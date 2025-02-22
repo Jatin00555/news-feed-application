@@ -42,8 +42,9 @@ export const newsApiSlice = createApi({
           from = "",
           to = "",
           author = "",
+          sourceString=''
         } = queryArgs;
-        return `${endpointName}-${query}-${category}-${from}-${to}-${author}`;
+        return `${endpointName}-${query}-${category}-${from}-${to}-${author}-${sourceString}`;
       },
 
       merge: (currentCache, newItems) => {
