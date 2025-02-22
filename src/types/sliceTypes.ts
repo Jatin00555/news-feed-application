@@ -14,6 +14,8 @@ export interface APIQueryPayloads {
   author: string;
   from:string
   to:string
+  page?:number
+  pageSize?:number
 }
 
 export interface ApplicationInfoState{

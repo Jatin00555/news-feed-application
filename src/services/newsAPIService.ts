@@ -8,12 +8,16 @@ export const newsApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: config.NEWS_API.BASE_URL }),
   endpoints: (builder) => ({
     fetchArticles: builder.query({
-      query: (
-        filters: APIQueryPayloads,
-        page: number = 1,
-        pageSize: number = 10
-      ) => {
-        const { query, category, from, to, author } = filters;
+      query: (filters: APIQueryPayloads) => {
+        const {
+          query,
+          category,
+          from,
+          to,
+          author,
+          page = 1,
+          pageSize = 10,
+        } = filters;
         const params = sanitizeObject({
           q: query || "latest",
           category: category,

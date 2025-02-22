@@ -8,12 +8,8 @@ export const nyTimesApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: config.NY_TIMES_API.BASE_URL }),
   endpoints: (builder) => ({
     fetchArticles: builder.query({
-      query: (
-        filters: APIQueryPayloads,
-        page: number = 1,
-        pageSize: number = 10
-      ) => {
-        const { query, category, from, to } = filters;
+      query: (filters: APIQueryPayloads) => {
+        const { query, category, from, to, page = 1, pageSize = 10 } = filters;
         const params = sanitizeObject({
           q: query || "latest",
           fq: `${category ? `section_name:${category}` : ""}`,

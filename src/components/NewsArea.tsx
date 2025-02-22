@@ -12,6 +12,7 @@ import { persistFiltersToLocalStorage } from "../storage/slices/filterSlice";
 import { trimString } from "../utils/helpers";
 import NoData from "./filterComponents/NoData";
 import { newsAreaContainer } from "./styles";
+import { throttle } from "lodash";
 
 const NewsArea = () => {
   const filters = useSelector((state: RootState) => state.filters);
@@ -43,6 +44,13 @@ const NewsArea = () => {
     handleFetchNews();
   }, [handleFetchNews]);
 
+  const throttledFetchNews = useCallback(
+    throttle(() => {
+      handleFetchNews();
+    }, 2000),
+    [handleFetchNews]
+  );
+
   return (
     <FullSizeBoxStack flexDirection="row">
       <BorderBoxColumnStack sx={newsAreaContainer}>
@@ -53,7 +61,7 @@ const NewsArea = () => {
           <ContentArea
             hasMore={true}
             articles={data}
-            loadMore={handleFetchNews}
+            loadMore={throttledFetchNews}
             isLoading={isLoading}
           />
         )}

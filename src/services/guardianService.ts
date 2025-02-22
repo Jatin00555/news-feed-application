@@ -8,12 +8,8 @@ export const guardianApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: config.GUARDIAN_API.BASE_URL }),
   endpoints: (builder) => ({
     fetchArticles: builder.query({
-      query: (
-        filters: APIQueryPayloads,
-        page: number = 1,
-        pageSize: number = 10
-      ) => {
-        const { query, category, from, to } = filters;
+      query: (filters: APIQueryPayloads) => {
+        const { query, category, from, to, page = 1, pageSize = 10 } = filters;
         const params = sanitizeObject({
           q: query || "latest",
           section: category,
