@@ -215,7 +215,7 @@ docker-compose up -d --force-recreate
 - [The Guardian Open Platform](https://open-platform.theguardian.com/) for their news content
 - [NY Times Developer Network](https://developer.nytimes.com/) for their API access
 - The React and TypeScript communities for their excellent documentation
-- All contributors who have helped shape this project
+- Open AI, Claude
 
 ## 🔧 Troubleshooting
 
