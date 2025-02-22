@@ -47,6 +47,7 @@ const newsMappers: Record<string, (article: any) => NewsArticleType> = {
     imageUrl: article.urlToImage || "",
     description: article.description || "",
     avatarUrl: "src/assets/newsLogo.png",
+    author: article.author,
   }),
   [guardian]: (article) => ({
     id: article.id,

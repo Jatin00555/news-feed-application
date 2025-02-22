@@ -23,4 +23,9 @@ const newsAreaContainer = {
 
 const categoryContainer = {flexDirection:'row', gap:1, flexWrap:'wrap', alignItems:'center', minWidth:'50%'} 
 
-export { newsCardStyling, newsDescStyling, newsAreaContainer, categoryContainer };
+const logoStyles = {
+  height: "40px",
+  width: "auto",
+};
+
+export { newsCardStyling, newsDescStyling, newsAreaContainer, categoryContainer, logoStyles };

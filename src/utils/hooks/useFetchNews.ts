@@ -6,6 +6,8 @@ import { categoryMapping, guardian, newsApi, nyTimes } from "../staticData";
 import { debounce } from "lodash";
 import { getDateRange } from "../helpers";
 import { NewsArticleType } from "../../types/commonTypes";
+import { useDispatch } from "react-redux";
+import { setAuthorList } from "../../storage/slices/applicationInfoSlice";
 
 interface FetchQueryOptions {
   source?: string[];
@@ -16,6 +18,7 @@ interface FetchQueryOptions {
 }
 
 const useFetchNews = () => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<NewsArticleType[]>([]);
   const [selectedSource, setSelectedSource] = useState<string[]>([]);
@@ -40,6 +43,21 @@ const useFetchNews = () => {
     [nyTimes]: nyTimesData,
     [guardian]: guardianData,
   };
+
+  useEffect(() => {
+    dispatch(
+      setAuthorList(
+        newsOrgData?.flatMap((ele) =>
+          ele.author
+            ? {
+                key: ele.author,
+                label: ele.author,
+              }
+            : []
+        ) || []
+      )
+    );
+  }, [newsOrgData, dispatch]);
 
   useEffect(() => {
     if (authorFilter) {

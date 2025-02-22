@@ -11,6 +11,7 @@ export interface NewsArticleType {
   subheader: string;
   imageUrl: string;
   description: string;
+  author?:string
 }
 
 export interface ArticleKeyMapping {
