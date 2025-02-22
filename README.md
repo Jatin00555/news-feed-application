@@ -111,24 +111,22 @@ Before running the application, ensure you have:
 docker pull jatin00555/news-feed-application:latest
 
 # Run the container
-docker run -d -p 8080:80 --name news-feed-application \
-  -e VITE_NEWS_API_KEY=your_newsapi_key_here \
-  -e VITE_GUARDIAN_API_KEY=your_guardian_api_key_here \
-  -e VITE_NY_TIMES_API_KEY=your_nytimes_key_here \
-  jatin00555/news-feed-application:latest
+docker run -d -p 8080:80 jatin00555/news-feed-application
 ```
 
 #### Option 2: Build Locally
 ```bash
 # Build the Docker image
-docker build -t news-feed-application .
+docker build -t jatin00555/news-feed-application \
+  --build-arg VITE_NEWS_API_KEY=your_newsapi_key_here \
+  --build-arg VITE_GUARDIAN_API_KEY=your_guardian_api_key_here \
+  --build-arg VITE_NY_TIMES_API_KEY=your_nytimes_key_here \
+  .
+```
 
 # Run the container
-docker run -d -p 3000:80 --name news-feed-application \
-  -e VITE_NEWS_API_KEY=your_newsapi_key_here \
-  -e VITE_GUARDIAN_API_KEY=your_guardian_api_key_here \
-  -e VITE_NY_TIMES_API_KEY=your_nytimes_key_here \
-  news-feed-application
+```bash
+docker run -d -p 8080:80 jatin00555/news-feed-application
 ```
 
 ## 📚 Available Scripts

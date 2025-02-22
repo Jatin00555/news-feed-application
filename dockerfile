@@ -4,6 +4,9 @@ FROM node:18-alpine AS build
 # Set working directory inside the container
 WORKDIR /app
 
+# Copy .env.example first so that it exists in the container
+COPY .env.example .env
+
 # Define build-time arguments
 ARG VITE_NEWS_API_KEY
 ARG VITE_GUARDIAN_API_KEY
@@ -13,6 +16,7 @@ ARG VITE_NY_TIMES_API_KEY
 ENV VITE_NEWS_API_KEY=${VITE_NEWS_API_KEY}
 ENV VITE_GUARDIAN_API_KEY=${VITE_GUARDIAN_API_KEY}
 ENV VITE_NY_TIMES_API_KEY=${VITE_NY_TIMES_API_KEY}
+
 
 # Copy package.json and package-lock.json first (to cache dependencies)
 COPY package.json package-lock.json ./
