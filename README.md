@@ -28,3 +28,9 @@ A **React.js & TypeScript-based News Aggregator** that fetches news from multipl
 ```sh
 git clone https://github.com/your-github-username/news-aggregator.git
 cd news-aggregator
+
+### 2️⃣ Create a `.env` File  
+- Copy `.env.example` and create a `.env` file:  
+  ```sh
+  cp .env.example .env
+
