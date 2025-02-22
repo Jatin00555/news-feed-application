@@ -111,10 +111,10 @@ Before running the application, ensure you have:
 docker pull jatin00555/news-feed-application:latest
 
 # Run the container
-docker run -d \
-  -p 3000:3000 \
-  --name news-feed-application \
-  --env-file .env \
+docker run -d -p 8080:80 --name news-feed-application \
+  -e VITE_NEWS_API_KEY=your_newsapi_key_here \
+  -e VITE_GUARDIAN_API_KEY=your_guardian_api_key_here \
+  -e VITE_NY_TIMES_API_KEY=your_nytimes_key_here \
   jatin00555/news-feed-application:latest
 ```
 
@@ -124,55 +124,11 @@ docker run -d \
 docker build -t news-feed-application .
 
 # Run the container
-docker run -d \
-  -p 3000:3000 \
-  --env-file .env \
+docker run -d -p 3000:80 --name news-feed-application \
+  -e VITE_NEWS_API_KEY=your_newsapi_key_here \
+  -e VITE_GUARDIAN_API_KEY=your_guardian_api_key_here \
+  -e VITE_NY_TIMES_API_KEY=your_nytimes_key_here \
   news-feed-application
-```
-
-#### Using Docker Compose
-
-1. Create or modify `docker-compose.yml`:
-```yaml
-version: '3.8'
-services:
-  app:
-    image: jatin00555/news-feed-application:latest  # Use Docker Hub image
-    # OR build locally:
-    # build: .
-    ports:
-      - "3000:3000"
-    env_file:
-      - .env
-    restart: unless-stopped
-```
-
-2. Run with Docker Compose:
-```bash
-# Start the application
-docker-compose up -d
-
-# View logs
-docker-compose logs -f
-
-# Stop the application
-docker-compose down
-```
-
-### Common Docker Commands
-```bash
-# View container logs
-docker logs news-aggregator
-
-# Stop container
-docker stop news-aggregator
-
-# Remove container
-docker rm news-aggregator
-
-# Update to latest version
-docker pull jatin00555/news-aggregator:latest
-docker-compose up -d --force-recreate
 ```
 
 ## 📚 Available Scripts
