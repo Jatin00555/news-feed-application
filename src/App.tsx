@@ -6,6 +6,7 @@ import { ThemeProvider } from "@mui/material";
 import lightTheme from "./themes/lightTheme";
 import GlobalErrorBoundary from "./components/GlobalErrorBoundry";
 
+
 function App() {
   return (
     <ThemeProvider theme={lightTheme}>
