@@ -8,39 +8,51 @@ News Aggregator is a powerful web application that consolidates news from variou
 
 ## ✨ Features
 
-- **Advanced Search & Filtering**
-  - Search articles by keywords
-  - Filter by date ranges
-  - Category-based filtering
-  - Source-specific searches
+### Advanced Search & Filtering
+- Full-text search across all articles
+- Date range filtering with calendar integration
+- Category-based filtering (Technology, Business, Sports, etc.)
+- Source-specific searches
+- Real-time search suggestions
 
-- **Multi-Source Integration**
-  - NewsAPI integration
-  - The Guardian API support
-  - New York Times API integration
-  - Unified search across all sources
+### Multi-Source Integration
+- NewsAPI integration with real-time updates
+- The Guardian API support with full article content
+- New York Times API integration with archive access
+- Unified search across all sources
+- Configurable source priorities
 
-- **Enhanced User Experience**
-  - Infinite scroll implementation
-  - Responsive design for all devices
-  - Dark/Light theme support
-  - Bookmark favorite articles
+### Enhanced User Experience
+- Infinite scroll for seamless article browsing
+- Responsive design optimized for mobile, tablet, and desktop
+- Dark/Light theme with system preference detection
+- Bookmark and save articles for offline reading
+- Share articles across social media platforms
+- Reading time estimates
+- Article summarization
 
-- **Personalization**
-  - Customizable news feed
-  - Preferred sources selection
-  - Category preferences
-  - Save search preferences
+### Personalization
+- Customizable news feed based on interests
+- Source preference management
+- Category-based content filtering
+- Saved searches and alerts
+- Reading history tracking
+- Personalized recommendations
 
 ## 🛠️ Technical Stack
 
-- **Frontend Framework**: React.js 18.x with TypeScript
-- **State Management**: Redux Toolkit (RTK)
-- **UI Components**: Material-UI v5
-- **API Management**: React Query
-- **Containerization**: Docker
-- **Testing**: Jest & React Testing Library
-- **Code Quality**: ESLint & Prettier
+### Frontend
+- React.js 18.x with TypeScript
+- Redux Toolkit (RTK) for state management
+- Material-UI v5 for components
+- React Query for API data fetching
+- React Router v6 for navigation
+- Axios for HTTP requests
+
+### Development Tools
+- Vite for build tooling
+- ESLint & Prettier for code quality
+
 
 ## 📋 Prerequisites
 
@@ -52,11 +64,11 @@ Before running the application, ensure you have:
 - API keys from:
   - NewsAPI
   - The Guardian
-  - New York Times
+  - The New York Times
 
 ## 🚀 Getting Started
 
-### Method 1: Local Development
+### Local Development Setup
 
 1. **Clone the Repository**
    ```bash
@@ -86,52 +98,104 @@ Before running the application, ensure you have:
    ```
    Access the application at `http://localhost:5173`
 
-6. **Build for Production**
+5. **Build for Production**
    ```bash
    npm run build
    ```
 
-### Method 2: Docker Deployment
+### Docker Deployment
 
-1. **Build Docker Image**
-   ```bash
-   docker build -t news-aggregator .
-   ```
+#### Option 1: Pull from Docker Hub (Recommended)
+```bash
+# Pull the image from Docker Hub
+docker pull jatin00555/news-feed-application:latest
 
-2. **Run Container**
-   ```bash
-   docker run -d \
-     -p 3000:3000 \
-     -e REACT_APP_NEWS_API_KEY=your_newsapi_key \
-     -e REACT_APP_GUARDIAN_API_KEY=your_guardian_key \
-     -e REACT_APP_NYTIMES_API_KEY=your_nytimes_key \
-     news-aggregator
-   ```
+# Run the container
+docker run -d \
+  -p 3000:3000 \
+  --name news-feed-application \
+  --env-file .env \
+  jatin00555/news-feed-application:latest
+```
 
-   Or using docker-compose:
-   ```bash
-   docker-compose up -d
-   ```
+#### Option 2: Build Locally
+```bash
+# Build the Docker image
+docker build -t news-feed-application .
 
-### API Keys
+# Run the container
+docker run -d \
+  -p 3000:3000 \
+  --env-file .env \
+  news-feed-application
+```
 
-Obtain API keys from:
-- [NewsAPI](https://newsapi.org/register)
-- [The Guardian](https://open-platform.theguardian.com/access/)
-- [NY Times](https://developer.nytimes.com/get-started)
+#### Using Docker Compose
 
-### Environment Variables
+1. Create or modify `docker-compose.yml`:
+```yaml
+version: '3.8'
+services:
+  app:
+    image: jatin00555/news-feed-application:latest  # Use Docker Hub image
+    # OR build locally:
+    # build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    restart: unless-stopped
+```
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| VITE_NEWS_API_KEY | NewsAPI access key | Yes |
-| VITE_GUARDIAN_API_KEY | Guardian API key | Yes |
-| VITE_NY_TIMES_API_KEY | NY Times API key | Yes |
+2. Run with Docker Compose:
+```bash
+# Start the application
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop the application
+docker-compose down
+```
+
+### Common Docker Commands
+```bash
+# View container logs
+docker logs news-aggregator
+
+# Stop container
+docker stop news-aggregator
+
+# Remove container
+docker rm news-aggregator
+
+# Update to latest version
+docker pull jatin00555/news-aggregator:latest
+docker-compose up -d --force-recreate
+```
 
 ## 📚 Available Scripts
 
 - `npm run dev`: Start development server
 - `npm run build`: Build for production
+
+## 🔑 API Keys Setup
+
+### NewsAPI
+1. Visit [NewsAPI](https://newsapi.org/register)
+2. Create an account and get your API key
+3. Add the key to your `.env` file
+
+### The Guardian
+1. Visit [The Guardian Open Platform](https://open-platform.theguardian.com/access/)
+2. Register for an API key
+3. Add the key to your `.env` file
+
+### NY Times
+1. Visit [NY Times Developer Portal](https://developer.nytimes.com/get-started)
+2. Create an account and get your API key
+3. Add the key to your `.env` file
 
 ## 🤝 Contributing
 
@@ -141,12 +205,26 @@ Obtain API keys from:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-
 ## 👥 Authors
 
-- **Jatin Kumar** - *Initial work* - [YourGithub](https://github.com/jatin00555)
+- **Jatin Kumar** - *Initial work* - [GitHub](https://github.com/jatin00555)
 
 ## 🙏 Acknowledgments
 
-- Thanks to NewsAPI, The Guardian, and NY Times for providing their APIs
-- The amazing React and TypeScript communities, Open AI
+- [NewsAPI](https://newsapi.org/) for their comprehensive news API
+- [The Guardian Open Platform](https://open-platform.theguardian.com/) for their news content
+- [NY Times Developer Network](https://developer.nytimes.com/) for their API access
+- The React and TypeScript communities for their excellent documentation
+- All contributors who have helped shape this project
+
+## 🔧 Troubleshooting
+
+### Docker Issues
+- If container fails to start, check logs: `docker logs news-aggregator`
+- If port 3000 is in use, change port mapping: `-p 3001:3000`
+- For environment issues: `docker exec news-aggregator env`
+
+### API Issues
+- Verify API keys are correctly set in `.env`
+- Check API rate limits
+- Ensure proper API endpoints in configuration
